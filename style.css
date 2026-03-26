@@ -1,0 +1,438 @@
+:root {
+  --black: #0a0a0a;
+  --panel: #111111;
+  --border: #2a2a2a;
+  --accent: #f81ef8;
+  --accent-dim: #c616c6;
+  --secondary-accent: #64d285;
+  --text: #e0e0e0;
+  --muted: #555;
+  --red: #ff3c3c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--text);
+  font-family: "Share Tech Mono", monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-left: 20px;
+  flex-wrap: wrap;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 200px;
+  transform: scale(1.25);
+  transform-origin: top left;
+}
+
+.content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  margin-left: clamp(1rem, 3vw, 2.5rem);
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(4rem, 24vw, 10rem);
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(248, 30, 248, 0.25);
+}
+
+.tagline {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  transition: all 0.15s;
+}
+
+.events-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  align-items: center; /* Center them horizontally */
+  justify-content: center;
+}
+
+.event-card {
+  border: 1px solid var(--border);
+  background-color: #111111;
+  align-self: center;
+  margin: 0 auto;
+  width: min(100%, 700px);
+}
+
+.event-card h2 {
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+  color: var(--secondary-accent);
+}
+
+.event-card h3 {
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.event-card ul {
+  padding-left: 10px;
+  list-style-type: none;
+}
+.event-card li {
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+
+.event-card p {
+  color: white;
+  padding-left: 10px;
+}
+
+a:hover {
+  color: var(--secondary-accent);
+}
+
+nav a:hover {
+  color: var(--secondary-accent);
+  border-color: var(--secondary-accent);
+  background: rgba(248, 30, 248, 0.05);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: transparent;
+  color: var(--text);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 200px;
+}
+
+.dropbtn:hover,
+.dropdown:hover .dropbtn {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(248, 30, 248, 0.05);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  min-width: 200px;
+  z-index: 100;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+::selection {
+  background-color: white;
+}
+
+::-moz-selection {
+  background-color: white;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.dropdown-content a:hover {
+  color: var(--secondary-accent);
+  background: rgba(248, 30, 248, 0.05);
+}
+
+/* MAP SECTION */
+.map-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 300px) minmax(170px, 230px);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+#map-container {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  width: min(100%, 300px);
+  margin-bottom: 20px;
+  padding-left: 20px;
+  cursor: crosshair;
+}
+
+#map-container::before {
+  content: "SOUTH EAST FLORIDA // COUNTY MAP";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.75rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+hr {
+  color: var(--muted);
+}
+
+#florida-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 1rem;
+  max-width: 100%;
+  max-height: auto;
+}
+
+#florida-map path {
+  fill: #1c1c1c;
+  stroke: #3a3a3a;
+  stroke-width: 0.5;
+  transition:
+    fill 0.1s,
+    stroke 0.1s;
+  cursor: crosshair;
+}
+
+#florida-map circle {
+  fill: var(--accent);
+  stroke-width: 0.5;
+  transition:
+    fill 0.1s,
+    stroke 0.1s;
+  cursor: pointer;
+}
+
+#florida-map path:hover {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+/* SIDE PANEL */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.info-box {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 0.75rem;
+}
+
+.info-box-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+#county-name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  min-height: 2rem;
+  text-shadow: 0 0 20px rgba(217, 30, 255, 0.3);
+  transition: opacity 0.1s;
+}
+
+#status-line {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+#status-line.active {
+  color: var(--accent-dim);
+}
+
+.coords-box {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+}
+
+.coords-box span {
+  color: var(--text);
+}
+
+/* blinking cursor */
+.cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* TOOLTIP */
+#map-tooltip {
+  background: rgba(0, 0, 0, 0.9);
+  color: #ff00ff; /* Matches your Lotus pink */
+  padding: 8px 12px;
+  border: 1px solid #ff00ff;
+  font-family: "Courier New", monospace; /* Or your site's font */
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  .main-wrapper {
+    padding-left: 0;
+  }
+
+  .menu-container {
+    transform: none;
+    min-width: 100%;
+  }
+
+  .content-right {
+    margin-left: 0;
+  }
+
+  .map-section {
+    grid-template-columns: 1fr;
+  }
+
+  #map-container {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
